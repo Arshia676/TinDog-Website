@@ -1,0 +1,174 @@
+<!-- Scripts --> 
+<script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>  
+
+<script type="text/javascript">
+    var songdata,duration;
+    var autor="";
+    var grabacion = "";
+    var esMovil = "0";
+    console.log("Mobile device: " + esMovil);
+    var recID;
+    var recDur;
+
+    if(grabacion){
+    recID = "";
+    recDur = "";
+    }   
+
+    var gameInstance;
+
+    //Cargar piano
+    if(esMovil == 1){ //MOBILE
+        var canvas = document.querySelector("#canvas");
+        var loadingBar = document.querySelector("#unity-loading-bar");
+        var progressBarFull = document.querySelector("#unity-progress-bar-full");
+
+        document.getElementById("unityContainer").style.height = "46.205vw";
+
+        var loaderUrl = "Build/PianoV4M1.loader.js";
+        var config = {
+        dataUrl: "Build/PianoV4M1.data.br",
+        frameworkUrl: "Build/PianoV4M1.framework.br",
+        codeUrl: "Build/PianoV4M1.wasm.br",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Recursive Arts",
+        productName: "VirtualPiano",
+        productVersion: "M2",
+        };
+
+        
+        // Mobile device style: fill the whole browser client area with the game canvas:
+
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+
+        // To lower canvas resolution on mobile devices to gain some
+        // performance, uncomment the following line:
+        // config.devicePixelRatio = 1;
+
+        loadingBar.style.display = "block";
+
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+            progressBarFull.style.width = 100 * progress + "%";
+                }).then((unityInstance) => {
+                    loadingBar.style.display = "none";
+                    gameInstance = unityInstance; //This is where you store the object
+                }).catch((message) => {
+                    alert(message);
+                });
+            };
+
+        document.body.appendChild(script);
+
+    }else{ //DESKTOP/LAPTOP
+        document.getElementById("unityContainer").style.height = "30.9677vw";
+        document.getElementById("unityContainer").style.maxHeight = "480px";
+        document.getElementById("unityContainer").style.maxWidth = "1550px";
+
+        var script1 = document.createElement("script");
+        script1.src = "TemplateData100/UnityProgress.js";
+
+        script1.onload = () =>{
+            var script2 = document.createElement("script");
+            script2.src = "Build/V5/UnityLoader.js";
+            script2.onload = () => {
+                gameInstance = UnityLoader.instantiate("unityContainer", "Build/V5/PianoV5.json", {onProgress: UnityProgress});
+            };
+            document.body.appendChild(script2);
+
+        };
+        document.body.appendChild(script1);
+    }
+</script>
+   
+    
+<noscript id="deferred-styles">
+    <link rel="stylesheet" type="text/css" href="TemplateData/pianostyle09.css"/>
+</noscript>
+
+<script>
+    var loadDeferredStyles = function() {
+    var addStylesNode = document.getElementById("deferred-styles");
+    var replacement = document.createElement("div");
+    replacement.innerHTML = addStylesNode.textContent;
+    document.body.appendChild(replacement)
+    addStylesNode.parentElement.removeChild(addStylesNode);
+    };
+    var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+      webkitRequestAnimationFrame || msRequestAnimationFrame;
+    if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+    else window.addEventListener('load', loadDeferredStyles);
+</script>
+ 
+<script src="js/webmidi.iife.min.js" defer></script>
+<script src="js/extrafunctions-16-min.js" defer></script>
+
+<script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Passion+One&display=swap' ] } 
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();</script> 
+
+
+
+<div id="play" style="height: auto !important;">
+    <div class="topAd">   
+        <!-- VirtualPiano FrontPage ATF -->
+    <ins class="adsbygoogle" style="display: block; height: 90px;" data-ad-client="ca-pub-2757256870596714" data-ad-slot="1033848215" data-ad-format="horizontal" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="filled"><div id="aswift_1_host" style="border: none; height: 90px; width: 1200px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_1" name="aswift_1" browsingtopics="true" style="left:0;position:absolute;top:0;border:0;width:1200px;height:90px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1200" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allow="attribution-reporting; run-ad-auction" src="https://googleads.g.doubleclick.net/pagead/ads?gdpr=0&amp;client=ca-pub-2757256870596714&amp;output=html&amp;h=90&amp;slotname=1033848215&amp;adk=2845128704&amp;adf=3424402380&amp;pi=t.ma~as.1033848215&amp;w=1200&amp;abgtt=6&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1723448045&amp;rafmt=2&amp;format=1200x90&amp;url=https%3A%2F%2Frecursivearts.com%2Fvirtual-piano%2F&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=2&amp;wgl=1&amp;uach=WyJXaW5kb3dzIiwiMTAuMC4wIiwieDg2IiwiIiwiMTI3LjAuNjUzMy4xMDAiLG51bGwsMCxudWxsLCI2NCIsW1siTm90KUE7QnJhbmQiLCI5OS4wLjAuMCJdLFsiR29vZ2xlIENocm9tZSIsIjEyNy4wLjY1MzMuMTAwIl0sWyJDaHJvbWl1bSIsIjEyNy4wLjY1MzMuMTAwIl1dLDBd&amp;dt=1723448044821&amp;bpp=13&amp;bdt=1105&amp;idt=-M&amp;shv=r20240807&amp;mjsv=m202408060101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;cookie=ID%3D8ef54da77dc253e4%3AT%3D1723447891%3ART%3D1723447891%3AS%3DALNI_MYoVwm5FKJ2TOS0G9fYUoe4OqIX9A&amp;gpic=UID%3D00000ec2a1be5dde%3AT%3D1723447891%3ART%3D1723447891%3AS%3DALNI_MYTa9egYSJwKNc__U4SVQEWG88K2A&amp;eo_id_str=ID%3D6e78663f45f1dde5%3AT%3D1723447891%3ART%3D1723447891%3AS%3DAA-AfjbAShbUUP3NwclpZ-klpNWy&amp;prev_fmts=0x0%2C300x600&amp;nras=1&amp;correlator=4784873110970&amp;frm=20&amp;pv=1&amp;u_tz=-420&amp;u_his=2&amp;u_h=768&amp;u_w=1366&amp;u_ah=728&amp;u_aw=1366&amp;u_cd=24&amp;u_sd=1&amp;dmc=8&amp;adx=74&amp;ady=102&amp;biw=1349&amp;bih=641&amp;scr_x=0&amp;scr_y=95&amp;eid=44759875%2C44759926%2C44759842%2C42531706%2C95334526%2C95334830%2C95337869%2C95338228%2C95339230%2C95336267%2C31078663%2C31078665%2C31078668%2C31078670&amp;oid=2&amp;pvsid=2206895184086009&amp;tmod=1578119857&amp;uas=0&amp;nvt=3&amp;ref=https%3A%2F%2Fsearch.yahoo.com%2F&amp;fc=1920&amp;brdim=0%2C0%2C0%2C0%2C1366%2C0%2C1366%2C728%2C1366%2C641&amp;vis=1&amp;rsz=%7C%7CpEe%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;bz=1&amp;td=1&amp;tdf=2&amp;psd=W251bGwsbnVsbCxudWxsLDNd&amp;nt=1&amp;ifi=2&amp;uci=a!2&amp;fsb=1&amp;dtd=445" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-google-query-id="CL3hm6T47ocDFdYzBgAd6i0KZg" data-load-complete="true"></iframe></div></ins>
+   
+    </div>
+
+    <div id="points"></div>
+    <div id="unityContainer" style="height: 30.9677vw; max-height: 480px; max-width: 1550px; padding: 0px; margin: 0px; border: 0px; background: url(&quot;Build/V5/PianoV5.jpg&quot;) center center / cover;"><canvas tabindex="1" id="canvas" width="490" height="200" style="width: 100%; height: 100%; cursor: default;"></canvas><div id="loadingBox" style="display: none;"><div id="bgBar"></div><div id="progressBar" style="width: 200px;"></div><p id="loadingInfo">Loading Piano... 100%</p></div></div>
+    <div id="midi-btn" onclick="showMIDImenu()"><img alt="midi devices" src="images/midi_btn.svg"></div>
+</div>
+
+
+
+font-size: 100%;
+padding: 0;
+text-align: center;
+user-select: none;
+width: 100%;
+margin: auto;
+min-width: 320px;
+background: #d3d9df;
+padding-top: 10px;
+padding-bottom: 25px;
+display: flex;
+flex-direction: column;
+align-items: center;
+height: auto !important;
+
+
+document.querySelector("#play")
+document.querySelector("#unityContainer")
+
+
+
+font-size: 100%;
+text-align: center;
+user-select: none;
+display: inline-block;
+position: relative;
+width: 100%;
+min-height: 200px;
+height: 30.9677vw;
+max-height: 480px;
+max-width: 1550px;
+padding: 0px;
+margin: 0px;
+border: 0px;
+background: url("Build/V5/PianoV5.jpg") center center / cover;
